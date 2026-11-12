@@ -1,0 +1,12 @@
+.DS_Store
+book_tfidf_vectorizer.joblib
+book_X_tfidf.npz
+df_book_reviews_cleaned.csv
+df_book_reviews_spoiler_features.csv
+df_movie_reviews_cleaned.csv
+df_movie_reviews_spoiler_features.csv
+goodreads_reviews_spoiler_raw.json.gz
+IMDB_movie_details.json
+IMDB_reviews.json
+movie_X_tfidf.npz
+tfidf_vectorizer.joblib
