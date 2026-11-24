@@ -9,6 +9,7 @@ from sklearn.model_selection import train_test_split
 from torch.utils.data import Dataset, DataLoader
 from torch.nn.utils.rnn import pad_sequence
 import numpy as np
+import time
 
 class Spoiler_Dataset (Dataset) :
     def __init__ (self, df) :
@@ -45,8 +46,8 @@ class Single_Direction_LSTM (nn.Module) :
         B, T, _ = X.shape
         H = torch.zeros (B, self.n_hiddens, device = X.device)
         C = torch.zeros_like (H)
-        steps = range (T -1 , -1, -1) if reverse else range (T)
         
+        steps = range (T -1 , -1, -1) if reverse else range (T)
         for t in steps :
             x = X [:, t]
             I = torch.sigmoid (x @ self.W_xi + H @ self.W_hi + self.b_i)
@@ -73,7 +74,11 @@ class BiLSTM (nn.Module) :
         m = (x != 0).float ()
         em = self.embedding (x)
         h = torch.cat ([self.fwd (em, m), self.rvrs (em, m, reverse = True)], dim = 1)
+
         return self.fc (h).squeeze (1)
+    
+    def predict (self) :
+        raise NotImplementedError
 
 SAMPLE_SIZE = 5_000
 MAX_LENGTH = 400
@@ -138,7 +143,6 @@ val_ids = [i for ids in val_df ["ids"] for i in ids]
 print (f"unknown words in validation : {val_ids.count (1) / len (val_ids):.1%}")
 
 print (train_df ["ids"].iloc [0] [: 20])
-
 train_loader = DataLoader (Spoiler_Dataset (train_df), batch_size = 32, shuffle = True, collate_fn = collate)
 val_loader = DataLoader (Spoiler_Dataset (val_df), batch_size = 32, collate_fn = collate)
 test_loader = DataLoader (Spoiler_Dataset (test_df), batch_size = 32, collate_fn = collate)
