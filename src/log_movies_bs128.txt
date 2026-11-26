@@ -1,0 +1,65 @@
+Namespace(domain='movies', num_samples=100000, num_epochs=5, max_length=400, batch_size=128, lr=0.001, neg_per_pos=3, threshold=0.5, dropout=0.3)
+[nltk_data] Downloading package punkt_tab to
+[nltk_data]     /Users/michaelhernandez/nltk_data...
+[nltk_data]   Package punkt_tab is already up-to-date!
+Data path:  /Users/michaelhernandez/Documents/CS4120/CS4120/dataset/df_movie_reviews_spoiler_features.csv
+df.shape:  (573259, 2)
+has_spoiler
+0    422484
+1    150775
+Name: count, dtype: int64
+train : 70000 reviews, 18199 spoilers (26.0%)
+val : 15000 reviews, 3900 spoilers (26.0%)
+test : 15000 reviews, 3899 spoilers (26.0%)
+               count        mean         std   min    25%    50%    75%     max
+has_spoiler                                                                    
+0            51801.0  264.775564  202.390582   9.0  141.0  194.0  318.0  2711.0
+1            18199.0  385.055937  258.231287  24.0  191.0  299.0  499.0  1844.0
+truncated : 21.8%
+vocabulary size :  85071
+describe train_fd:  count    70000.000000
+mean       296.046743
+std        224.570172
+min          9.000000
+25%        149.000000
+50%        215.000000
+75%        366.000000
+max       2711.000000
+Name: tokens, dtype: float64
+
+describe val_df:  count    15000.000000
+mean       298.478333
+std        224.104315
+min          7.000000
+25%        150.000000
+50%        218.000000
+75%        374.000000
+max       1762.000000
+Name: tokens, dtype: float64
+
+describe test_df:  count    15000.000000
+mean       294.678400
+std        221.805795
+min          9.000000
+25%        149.000000
+50%        215.000000
+75%        369.000000
+max       2027.000000
+Name: tokens, dtype: float64
+Percentage of unknown words in validation : 1.0%
+Training start
+epoch 1  loss 70009.7  val acc 0.650  val P 0.366  val R 0.477  val F1 0.415  (505 s)
+epoch 2  loss 68418.7  val acc 0.587  val P 0.340  val R 0.623  val F1 0.440  (510 s)
+epoch 3  loss 66011.3  val acc 0.633  val P 0.368  val R 0.572  val F1 0.448  (510 s)
+epoch 4  loss 61835.0  val acc 0.650  val P 0.386  val R 0.584  val F1 0.465  (509 s)
+epoch 5  loss 56950.7  val acc 0.640  val P 0.370  val R 0.552  val F1 0.443  (509 s)
+t=0.3  val F1 0.445  |  TEST acc 0.440  P 0.301  R 0.874  F1 0.448
+t=0.4  val F1 0.465  |  TEST acc 0.566  P 0.343  R 0.736  F1 0.468
+t=0.5  val F1 0.465  |  TEST acc 0.650  P 0.386  R 0.583  F1 0.464
+t=0.6  val F1 0.431  |  TEST acc 0.712  P 0.443  R 0.422  F1 0.432
+t=0.7  val F1 0.360  |  TEST acc 0.745  P 0.518  R 0.263  F1 0.349
+t=0.8  val F1 0.256  |  TEST acc 0.754  P 0.622  R 0.140  F1 0.229
+t=0.9  val F1 0.171  |  TEST acc 0.756  P 0.816  R 0.081  F1 0.147
+BEST threshold (chosen on val) = 0.4
+TEST  acc 0.566  P 0.343  R 0.736  F1 0.468
+Total time: 43.2 min (2594 s)
